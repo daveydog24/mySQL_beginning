@@ -1,0 +1,58 @@
+//1.DISPLAYS ALL THE CONTRIES THAT SPEAK SLOVENE AND WHAT PERCENTAGE OF THEIR COMPANY IN DESCENDING ORDER FROM GREATEST DOWN
+
+SELECT countries.name AS country_name, languages.language AS country_language, languages.percentage AS percent_of_spoken_language 
+FROM countries
+JOIN languages ON countries.id = languages.country_id
+Where languages.language = 'Slovene'
+ORDER BY languages.percentage DESC;
+
+//2. DISPLAYS ALL THE COUNTRIES AND HOW MANY CITIES THEY HAVE IN DESCENDING ORDER FROM GREATEST DOWN
+
+SELECT countries.name AS country_name, COUNT(cities.id) AS number_of_cities
+FROM countries
+JOIN cities ON countries.id = cities.country_id
+GROUP BY countries.id
+ORDER BY number_of_cities DESC;
+
+//3. DISPLAYS ALL THE CITIES IN MEXICO WITH A POPULATION OVER 500,000 IND DESCENDING ORDER FROM GREATEST DOWN
+
+SELECT cities.name AS city, cities.population
+FROM countries
+JOIN cities ON countries.id = cities.country_id
+WHERE countries.name = 'Mexico' and cities.population > 500000
+ORDER BY cities.population DESC;
+
+//4. DISPLAYS ALL THE COUNTRIES AND THEIR LANGUAGES WITH PERCENTAGE LISTED GREATEST IN DESCENDING ORDER BUT ALL OVER 89% OF A LANGUAGE.
+
+SELECT countries.name AS country_name, languages.language AS country_language, languages.percentage AS language_percentage
+FROM countries 
+JOIN languages ON countries.id = languages.country_id
+WHERE languages.percentage > 89
+ORDER BY languages.percentage DESC
+
+//5. DISPLAYS ALL THE COUNTRIES WITH SURFACE AREA BELOW 501 AND POPULATION ABOVE 100,000
+
+SELECT countries.name AS country_name, countries.surface_area, countries.population
+FROM countries
+WHERE countries.surface_area < 501 AND countries.population > 100000
+
+//6.  DISPLAYS ALL THE COUNTRIES THAT HAVE A CONSTITUTIONAL MONARCHY, LIFE EXPECTANCY OVER 75 AND A CAPITAL OVER 200? (DIDNT REALLY UNDERSTAND THAT, WAS THAT JUST THE ID OF THE CAPITOL [I THOUGHT WE WERE LOOKING FOR THE POPULATION OF THE CAPITAL AND COUDNT QUITE FIGURE IT OUT])
+
+SELECT countries.name AS country_name, countries.government_form, countries.capital
+FROM countries
+WHERE countries.government_form = 'Constitutional Monarchy' AND countries.capital > 200 AND countries.life_expectancy > 75;
+
+//7. DISPLAYS ALL THE CITIES IN ARGENTINA WITHIN THE BUENOS AIRES DISTRICT AND HAVE A POPULATION OVER 500,000
+
+SELECT countries.name AS Country Name, cities.name AS City Name, cities.district AS District, cities.population AS Population
+FROM countries
+JOIN cities ON countries.id = cities.country_id
+WHERE cities.district = 'BUENOS AIRES' AND cities.population > 500000 AND countries.name = 'Argentina';
+
+//8. DISPLAYS ALL THE REGIONS AND HOW MANY COUNTRIES ARE IN EACH IN DESCENDING ORDER STARTING WITH THE GREATEST DOWN
+
+SELECT countries.region AS country_region, COUNT(countries.id) AS number_of_countries
+FROM countries
+GROUP BY countries.region
+ORDER BY number_of_countries DESC;
+

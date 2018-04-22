@@ -1,0 +1,32 @@
+1. OperationalError: (_mysql_exceptions.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' (61)") (Background on this error at: http://sqlalche.me/e/e3q8)
+
+changed the server from 3306 -> 5306 and it threw that error
+changed the port back to what sql is running on with my local host and it worked
+
+2. OperationalError: (_mysql_exceptions.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: YES)") (Background on this error at: http://sqlalche.me/e/e3q8)
+
+i had changed the password so it didnt match and it denied my access. once i changed the password back it worked
+
+3. Traceback (most recent call last):
+  File "server.py", line 4, in <module>
+    mysql = MySQLConnector(app,'friendsdb')
+  File "/Users/davidwukelic/Desktop/DojoAssignments/python_stack/flask_MySQL/friends/mysqlconnection.py", line 40, in MySQLConnector
+    return MySQLConnection(app, db)
+  File "/Users/davidwukelic/Desktop/DojoAssignments/python_stack/flask_MySQL/friends/mysqlconnection.py", line 9, in __init__
+    'database': db3, # we got db as an argument
+NameError: global name 'db3' is not defined
+
+i had changed the name of the database argument name and threw that error since it didnt know what db3 is and if i changed it back it works
+
+
+4. Traceback (most recent call last):
+  File "server.py", line 4, in <module>
+    mysql = MySQLConnector(app,'friendsdb')
+  File "/Users/davidwukelic/Desktop/DojoAssignments/python_stack/flask_MySQL/friends/mysqlconnection.py", line 40, in MySQLConnector
+    return MySQLConnection(app, db)
+  File "/Users/davidwukelic/Desktop/DojoAssignments/python_stack/flask_MySQL/friends/mysqlconnection.py", line 15, in __init__
+    DATABASE_URI = "mysql://{}:{}@127.0.0.1:{}/{}".format(config['user'], config['password'], config['port'], config['database'])
+KeyError: 'database'
+
+got a key error for changing the string name for database and added an extra s by accident. this was fixed once i spelled database correctly
+most of the errors i found were either keyerror above, the NameError because something wasnt defined or the operational errors.
